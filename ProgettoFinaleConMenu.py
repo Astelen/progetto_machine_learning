@@ -13,7 +13,7 @@ from sklearn.ensemble import GradientBoostingClassifier
 # Funzione per caricare il dataset
 def carica_dataset():
     global df
-    df = pd.read_csv('songs.csv')
+    df = pd.read_csv('progetto_machine_learning/songs.csv')
     print('Dataset caricato con successo!')
     print('Ecco il dataset originale:')
     print("Ecco le prime 5 righe del dataset: \n", df.head())
@@ -25,6 +25,7 @@ def prepara_dataset():
     global df_subset
     df_subset = df.iloc[:, 4:18].drop(columns=['track_album_release_date', 'playlist_genre'], errors='ignore')
     df_subset = df_subset.dropna()
+    print("Ecco le prime 5 righe del dataset preparato: ", df_subset.head())
     print('Dataset preparato con successo!')
 
 # Funzione per creare le classi di popolarità
@@ -32,6 +33,7 @@ def crea_classi_popolarita():
     global X, y
     X = df_subset.drop(columns=['track_popularity'])
     y = df_subset['track_popularity']
+    print("Classe popolarità: ", y)
     print('Classi di popolarità create con successo!')
 
 # Funzione per il preprocessing dei dati
@@ -138,7 +140,7 @@ def visualizza_grafici():
             continue
         elif scelta_grafico == "7":
             plt.figure(figsize=(8, 5))
-            sns.pairplot(df.select_dtypes(include=['number']), hue='popularityclass', palette='coolwarm', corner=True)
+            sns.pairplot(df.select_dtypes(include=['number']), hue='track_popularity', palette='coolwarm', corner=True)
             plt.show()
         elif scelta_grafico == "8":
             print("Prosegui con le tue scelte.")
