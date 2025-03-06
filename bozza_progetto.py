@@ -15,8 +15,9 @@ from sklearn.metrics import mean_squared_error, r2_score
 import xgboost as xgb
 from sklearn.decomposition import PCA
 from sklearn.metrics import adjusted_rand_score, homogeneity_score
+import joblib
 
-df1 = pd.read_csv('songs.csv')
+df1 = pd.read_csv('progetto_machine_learning/songs.csv')
 # print(df.head())
 # print(df.info())
 # print(df.describe())
@@ -27,7 +28,8 @@ df_subset = df_subset.drop(['track_album_release_date', 'playlist_genre'], axis=
 # print(df_subset.head())
 # print(df_subset.info())
 
-df = pd.concat([df_subset, dummies], ignore_index=True)
+#df = pd.concat([df_subset, dummies], ignore_index=True)
+df = pd.concat([df_subset, dummies])
 ##Bisogna convertire i NaN in 0
 df = df.fillna(0)
 # print(df.info())
@@ -56,6 +58,9 @@ y = df['popularityclass']
 print(df.info())
 print(df.head())
 print(df.tail())
+
+righe_classe_5 = df[df['popularityclass'] == 5]
+print(f"Riga 1 con classe 5 {righe_classe_5.iloc[0,:]}")
 
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
@@ -331,6 +336,8 @@ accuratezza = accuracy_score(y_test, y_pred)
 print(f"Accuratezza con DTC dopo GridSearch di: {accuratezza}")
 #Accuratezza 0.7194444444444444
 
+#Salvo i parametri del modello in un file esterno tramite joblib
+joblib.dump(clf, 'decision_tree_model.pkl')
 
 #Input per valutare popolarita' nuove canzoni
 # Creiamo un array di input per stimare la popolarità di una nuova canzone
@@ -387,9 +394,36 @@ array_valore_scaled = np.array(lista_valore_scaled).reshape(1, -1)
 
 print(array_valore_scaled)
 
-predicted_popularity_class = clf.predict(new_song_scaled)
+#### Predirre la popolarita' ma funziona solo nel file dove ho gia' addestrato il modello
+# predicted_popularity_class = clf.predict(new_song_scaled)
+
+# print(f"Classe di popolarità prevista per la nuova canzone: {predicted_popularity_class[0]}")
+
+###Valori da inserire in file esterno per prova_modello esportato con joblib
+media_array = [3.11697168e-01, 3.20387500e-01, 2.42222222e-01, 3.63362868e-01,
+    2.87222222e-01, 5.75038710e-02, 1.12954897e-01, 8.00252125e-02,
+    2.59497698e-01, 2.07354403e-01, 1.05686254e+05, 8.88888889e-03,
+    6.94444444e-02, 2.37777778e-01, 4.38888889e-02, 1.02222222e-01,
+    3.77777778e-02,]
+devst_array = [3.37805860e-01, 3.45108749e-01, 3.38480829e-01, 3.71921669e-01,
+    4.52591888e-01, 1.10221078e-01, 2.03181785e-01, 1.26751393e-01,
+    3.09137652e-01, 2.54380590e-01, 1.10416969e+05, 9.38870259e-02,
+    2.54279049e-01, 4.25840640e-01, 2.04904807e-01, 3.03024509e-01,
+    1.90711361e-01]
+
+lista_titoli_input = ["danceability (da 0.0 a 1.0) ","energy (da 0.0 a 1.0) ","key (da 0.0 a 1.0) ","loudness (dB, da 0.0 a 1.0) ) ","mode (0 per tonalità minore, 1 per tonalità maggiore) ","speechiness (da 0.0 a 1.0) ","acousticness (da 0.0 a 1.0) ","liveness (da 0.0 a 1.0) ","valence (da 0.0 a 1.0) ","tempo (BPM, da 0.0 a 1.0) ","duration_ms (ms) ", "Edm (0 se non Edm, 1 se Edm) ", "Latin (0 se non Latin, 1 se Latin) ", "Pop (0 se non Pop, 1 se Pop) ", "R&b (0 se non R&b, 1 se R&b) ", "Rap (0 se non Rap, 1 se Rap) ", "Rock (0 se non Rock, 1 se Rock) "]
+
+##Codice per caricare il modello salvato
+# Carica il modello salvato
+clf = joblib.load('decision_tree_model.pkl')
+
+# Utilizza il modello addestrato per fare previsioni sull'array di input
+predicted_popularity_class = clf.predict(array_valore_scaled)
 
 print(f"Classe di popolarità prevista per la nuova canzone: {predicted_popularity_class[0]}")
+
+
+
 
 # Valutare quale caratteristica influenza di piu' la popolarita'
 # Esplorazione dei dati
