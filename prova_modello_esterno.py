@@ -23,14 +23,16 @@ for titolo in range(len(lista_titoli_input)):
 
 print(lista_canzone_input)
 
-#Standardizzazione dei valori
-array_canzone_input = np.array(lista_canzone_input)
-lista_valore_scaled = []
-for valore, media, devst in zip(array_canzone_input, media_array, devst_array):
-    valore_scaled = (valore - media) / devst
-    lista_valore_scaled.append(valore_scaled)
+array_valore_scaled = np.array(lista_canzone_input).reshape(1, -1)
 
-array_valore_scaled = np.array(lista_valore_scaled).reshape(1, -1)
+# #Standardizzazione dei valori
+# array_canzone_input = np.array(lista_canzone_input)
+# lista_valore_scaled = []
+# for valore, media, devst in zip(array_canzone_input, media_array, devst_array):
+#     valore_scaled = (valore - media) / devst
+#     lista_valore_scaled.append(valore_scaled)
+
+# array_valore_scaled = np.array(lista_valore_scaled).reshape(1, -1)
 
 print(array_valore_scaled)
 
