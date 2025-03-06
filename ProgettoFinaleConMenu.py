@@ -16,7 +16,9 @@ def carica_dataset():
     df1 = pd.read_csv('songs.csv')
     print('Dataset caricato con successo!')
     print('Ecco il dataset originale:')
-    print(df1.head())
+    print("Ecco le prime 5 righe del dataset: \n", df1.head())
+    print("Ecco le info del dataset: \n", df1.info())
+    print("Ecco la descrizone del dataset: \n", df1.describe())
 
 # Funzione per preparare il dataset
 def prepara_dataset():
