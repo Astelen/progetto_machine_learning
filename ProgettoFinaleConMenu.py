@@ -81,7 +81,8 @@ def visualizza_grafici():
         print('4. Istogramma tra possibilità di performance live e genere')
         print('5. Istogramma tra positività e genere')
         print('6. Boxplot sulla popolarità dei generi musicali')
-        print('7. Esci dal menù grafici')
+        print('7. Pairplot tra tutte le features')
+        print('8. Esci dal menù grafici')
         scelta_grafico = input()
         if scelta_grafico == "1":
             corr_matrix = df.select_dtypes(include=['number']).corr()
@@ -136,8 +137,9 @@ def visualizza_grafici():
             fig.show()
             continue
         elif scelta_grafico == "7":
-            print("Prosegui con le tue scelte.")
-            break
+            plt.figure(figsize=(8, 5))
+            sns.pairplot(df.select_dtypes(include=['number']), hue='popularityclass', palette='coolwarm', corner=True)
+            plt.show()
         elif scelta_grafico == "8":
             print("Prosegui con le tue scelte.")
             break
