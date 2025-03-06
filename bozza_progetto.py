@@ -21,6 +21,8 @@ df1 = pd.read_csv('progetto_machine_learning/songs.csv')
 # print(df.head())
 # print(df.info())
 # print(df.describe())
+# Verifica i valori unici nella colonna 'playlist_genre'
+print(df1['playlist_genre'].unique())
 dummies = pd.get_dummies(df1["playlist_genre"])
 
 df_subset = df1.iloc[:, 4:18]
@@ -107,14 +109,20 @@ X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, 
 # print(f"Accuratezza di: {accuratezza}")
 # #Accuratezza 0.72
 
-# #Gradient Boosting model
-# gbc = GradientBoostingClassifier(random_state=42)
-# gbc.fit(X_train, y_train)
-# predictions = gbc.predict(X_test)
+#Gradient Boosting model
+gbc = GradientBoostingClassifier(random_state=42)
+gbc.fit(X_train, y_train)
+predictions = gbc.predict(X_test)
 
-# accuracy = accuracy_score(y_test, predictions)
-# print("Accuracy: ", accuracy)
-# #Accuracy 0.67
+accuracy = accuracy_score(y_test, predictions)
+print("Accuracy: ", accuracy)
+#Accuracy 0.67
+
+y_train_pred = gbc.predict(X_train)
+y_test_pred = gbc.predict(X_test)
+
+print("Unique predicted classes in training:", np.unique(y_train_pred))
+print("Unique predicted classes in test:", np.unique(y_test_pred))
 
 # param_grid_gbc = {
 #     'n_estimators': [100, 200, 300],
@@ -225,8 +233,8 @@ X_pca = pca_spotify.fit_transform(X_scaled)
 X_train_pca, X_test_pca, y_train, y_test = train_test_split(X_pca, y, test_size=0.2, random_state=42)
 
 
-# #Commentato per non rilanciare la griglia
-# #Decision tree model
+#Commentato per non rilanciare la griglia
+#Decision tree model
 # clf = DecisionTreeClassifier(random_state = 42)
 # clf.fit(X_train_pca, y_train)
 # y_pred = clf.predict(X_test_pca)
@@ -240,7 +248,7 @@ X_train_pca, X_test_pca, y_train, y_test = train_test_split(X_pca, y, test_size=
 # param_grid = {
 #     'criterion': ['gini', 'entropy'],
 #     'splitter': ['best', 'random'],
-#     'max_depth': [None, 10, 20, 30, 40, 50],
+#     'max_depth': [3, 5, 10],
 #     'min_samples_split': [2, 5, 10],
 #     'min_samples_leaf': [1, 2, 4],
 #     'max_features': [None, 'auto', 'sqrt', 'log2']
@@ -255,9 +263,9 @@ X_train_pca, X_test_pca, y_train, y_test = train_test_split(X_pca, y, test_size=
 # #Esegui GridSearchCV
 # grid_search.fit(X_train, y_train)
 
-# #Stampa i migliori parametri trovati
+#Stampa i migliori parametri trovati
 # print(f"I migliori parametri trovati sono: {grid_search.best_params_}")
-# #I migliori parametri trovati sono: {'criterion': 'entropy', 'max_depth': 10, 'max_features': 'sqrt', 'min_samples_leaf': 4, 'min_samples_split': 2, 'splitter': 'random'}
+# #I migliori parametri trovati sono: {'criterion': 'entropy', 'max_depth': 3, 'max_features': 'sqrt', 'min_samples_leaf': 4, 'min_samples_split': 2, 'splitter': 'random'}
 
 # #Usa il miglior modello trovato per fare predizioni
 # best_clf = grid_search.best_estimator_
@@ -270,14 +278,17 @@ X_train_pca, X_test_pca, y_train, y_test = train_test_split(X_pca, y, test_size=
 
 
 # ####
-# # #Gradient Boosting model
-# gbc = GradientBoostingClassifier(random_state=42)
+# #Gradient Boosting model
+# gbc = GradientBoostingClassifier()
 # gbc.fit(X_train_pca, y_train)
 # predictions = gbc.predict(X_test_pca)
 
 # accuracy = accuracy_score(y_test, predictions)
 # print("Accuracy GBC: ", accuracy)
 # #Accuracy 0.675
+# y_train_pred = gbc.predict(X_train)
+# y_test_pred = gbc.predict(X_test)
+
 
 # param_grid_gbc = {
 #     'n_estimators': [100, 200, 300],
@@ -314,7 +325,7 @@ X_train_pca, X_test_pca, y_train, y_test = train_test_split(X_pca, y, test_size=
 #Decision tree model
 best_params = {
     'criterion': 'entropy',
-    'max_depth': 10,
+    'max_depth': 3,
     'max_features': 'sqrt',
     'min_samples_leaf': 4,
     'min_samples_split': 2,
