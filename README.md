@@ -1,37 +1,75 @@
-Progetto Music Popularity Prediction
+🎵 Music Popularity Prediction
 
-Questo progetto è stato sviluppato da un team di 3 persone, con l'obiettivo di []. Ogni membro del team ha contribuito a una parte specifica del codice.
+📌 Descrizione:
 
-Team Members and Contributions
-[Biagio Saccone] – Pulizia finale del codice
-Biagio ha gestito la pulizia finale del codice, ottimizzando le funzioni e migliorando la leggibilità. Ha assicurato che il codice fosse ben strutturato e privo di errori, mantenendo una logica chiara e una buona gestione delle variabili globali. Si è occupato di testare e debug le funzioni per garantire che il flusso del programma fosse coerente
+Il progetto Music Popularity Prediction è stato sviluppato con l'obiettivo di prevedere la popolarità delle canzoni in base a diverse caratteristiche musicali, come:
+🎶 Ballabilità ⚡ Energia 😊 Positività 🔍 Altri parametri musicali
 
-[Federica Acciarino] – Creazione del menu
-Federica ha progettato e sviluppato un'interfaccia utente basata su menu, dove l'utente può selezionare diverse funzionalità, come caricare il dataset, preparare i dati, addestrare il modello e visualizzare grafici. Il menu consente una navigazione fluida attraverso le operazioni del programma, facilitando l'interazione dell'utente.
+Il progetto utilizza un modello di Machine Learning (Gradient Boosting), addestrato su un dataset musicale per classificare la popolarità delle canzoni. Inoltre, offre funzionalità per visualizzare grafici interattivi, permettendo un'esplorazione dettagliata delle correlazioni tra le variabili.
 
-[Sara Corsetti] – Esportazione del modello con Joblib
-Sara si è occupata della parte di machine learning, implementando un modello di Gradient Boosting per prevedere la popolarità delle canzoni. Dopo l'addestramento del modello, ha gestito l'esportazione del modello tramite Joblib, permettendo di salvare il modello addestrato in un file che può essere riutilizzato senza la necessità di riaddestrarlo.
+👥 Membri del Team e Contributi:
 
-Features
-Caricamento del Dataset: Caricamento e visualizzazione delle prime righe del dataset musicale.
-Preprocessing dei Dati: Preparazione dei dati con l'eliminazione di valori nulli e la selezione delle colonne pertinenti.
-Creazione delle Classi di Popolarità: Creazione di classi per la popolarità delle canzoni, segmentando il target in base a range di valori.
-Addestramento del Modello: Utilizzo del modello di Gradient Boosting per predire la popolarità delle canzoni.
-Previsione della Popolarità per una Nuova Canzone: Input manuale delle caratteristiche di una canzone per ottenere la previsione della sua popolarità.
-Visualizzazione Grafica: Possibilità di visualizzare vari grafici interattivi e statici per esplorare le relazioni tra le variabili.
+🔹 [Biagio Saccone] – Pulizia finale del codice
+✔ Ottimizzazione delle funzioni e miglioramento della leggibilità del codice.
+✔ Strutturazione chiara del codice e gestione efficace delle variabili globali.
+✔ Debugging e testing per garantire il corretto funzionamento del programma.
 
-Tecnologie utilizzate
-Python 3.x
-Pandas: Per la gestione dei dati.
-NumPy: Per operazioni matematiche.
-Scikit-learn: Per la creazione del modello di machine learning (Gradient Boosting).
-Joblib: Per esportare il modello.
-Matplotlib & Plotly: Per la visualizzazione dei grafici.
-Seaborn: Per la creazione di pairplot e altre visualizzazioni.
+🔹 [Federica Acciarino] – Creazione del menu
+✔ Sviluppo di un'interfaccia utente basata su menu interattivo.
+✔ Implementazione di funzionalità per caricare il dataset, preparare i dati, addestrare il modello e visualizzare grafici.
+✔ Navigazione intuitiva per migliorare l'esperienza utente.
 
-Notes
-Il progetto è stato sviluppato utilizzando un approccio di lavoro in team, con ognuno dei membri responsabile per una parte specifica.
-Se riscontri bug o hai domande, apri una issue nel repository.
+🔹 [Sara Corsetti] – Esportazione del modello con Joblib
+✔ Implementazione del modello di Gradient Boosting per la previsione della popolarità delle canzoni.
+✔ Esportazione del modello con Joblib per consentire il riutilizzo senza riaddestramento.
 
-Author
-[Biagio Saccone, Federica Acciarino, Sara Corsetti]
+🚀 Funzionalità:
+
+✅ Caricamento del Dataset 📂
+Carica e visualizza i dati musicali con un'anteprima delle prime righe.
+
+✅ Preprocessing dei Dati 🛠️
+Rimuove valori nulli e seleziona le colonne più rilevanti per l'analisi.
+
+✅ Creazione delle Classi di Popolarità 📊
+Segmenta le canzoni in classi basate sulla popolarità.
+
+✅ Addestramento del Modello 🤖
+Utilizza Gradient Boosting per predire la popolarità.
+
+✅ Previsione della Popolarità per una Nuova Canzone 🎤
+Inserisci manualmente le caratteristiche di una canzone e ottieni una previsione.
+
+✅ Visualizzazione Grafica 📈
+Genera grafici statici e interattivi per esplorare i dati musicali.
+
+🛠️ Tecnologie Utilizzate:
+
+🔹 Python 3.x
+🔹 Pandas – Gestione ed elaborazione dei dati
+🔹 NumPy – Operazioni matematiche e calcoli numerici
+🔹 Scikit-learn – Machine Learning (Gradient Boosting)
+🔹 Joblib – Esportazione e salvataggio del modello
+🔹 Matplotlib & Plotly – Visualizzazione grafica e interattiva
+🔹 Seaborn – Creazione di visualizzazioni statistiche
+
+🎮 Menu di Navigazione:
+
+🔘 1: Carica il dataset
+🔘 2: Prepara il dataset
+🔘 3: Crea classi di popolarità
+🔘 4: Preprocessing dei dati
+🔘 5: Addestra il modello
+🔘 6: Previsione nuova canzone
+🔘 7: Visualizza grafici
+🔘 0: Esci dal programma
+
+📢 Note:
+
+🔹 Il progetto è stato sviluppato con un approccio collaborativo.🔹 Se riscontri bug o hai domande, apri una issue nel repository.
+
+✍️ Autori:
+
+👤 Biagio Saccone👤 Federica Acciarino👤 Sara Corsetti
+
+📌 Grazie per l'interesse nel nostro progetto! 🎵
