@@ -6,8 +6,6 @@ from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.preprocessing import LabelEncoder
 import matplotlib.pyplot as plt
 import plotly.express as px
-import seaborn as sns
-from sklearn.decomposition import PCA
 from sklearn.metrics import accuracy_score, classification_report
 from sklearn.preprocessing import KBinsDiscretizer
 

@@ -139,8 +139,11 @@ def visualizza_grafici():
             fig.show()
             continue
         elif scelta_grafico == "7":
+            numeric_df = df.select_dtypes(include=['number'])
+            if 'track_popularity' not in numeric_df.columns:
+                numeric_df['track_popularity'] = df['track_popularity']
             plt.figure(figsize=(8, 5))
-            sns.pairplot(df.select_dtypes(include=['number']), hue='track_popularity', palette='coolwarm', corner=True)
+            sns.pairplot(numeric_df, hue='track_popularity', palette='coolwarm', corner=True)
             plt.show()
         elif scelta_grafico == "8":
             print("Prosegui con le tue scelte.")
