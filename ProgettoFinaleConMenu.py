@@ -9,6 +9,7 @@ import plotly.express as px
 import seaborn as sns
 from sklearn.decomposition import PCA
 from sklearn.ensemble import GradientBoostingClassifier
+import joblib
 
 # Funzione per caricare il dataset
 def carica_dataset():
@@ -65,7 +66,8 @@ def addestra_modello():
 
 # Funzione per la previsione
 def previsione_nuova_canzone():
-    lista_titoli_input2 = df_subset.columns[1:17]
+    best_gb_clf = joblib.load('progetto_machine_learning/GradientBoostingClassifier_model.pkl')
+    lista_titoli_input2 = ["danceability (da 0.0 a 1.0) ","energy (da 0.0 a 1.0) ","key (da 0.0 a 1.0) ","loudness (dB, da 0.0 a 1.0) ) ","mode (0 per tonalità minore, 1 per tonalità maggiore) ","speechiness (da 0.0 a 1.0) ","acousticness (da 0.0 a 1.0) ","liveness (da 0.0 a 1.0) ","valence (da 0.0 a 1.0) ","tempo (BPM, da 0.0 a 1.0) ","duration_ms (ms)"]
     lista_canzone_input = []
     for titolo in range(len(lista_titoli_input2)):
         valore = float(input(("Inserisci il valore di ", lista_titoli_input2[titolo])))

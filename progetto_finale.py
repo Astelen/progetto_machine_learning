@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 from sklearn.metrics import accuracy_score, classification_report
 from sklearn.preprocessing import KBinsDiscretizer
+import joblib
 
 # Carica il dataset
 df = pd.read_csv("progetto_machine_learning/songs.csv")
@@ -81,8 +82,6 @@ y_binned = kbins.fit_transform(y.values.reshape(-1, 1)).astype(int).flatten()
 #Split dataset into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y_binned, test_size=0.2, random_state=42, stratify=y_binned)
 
-from sklearn.model_selection import GridSearchCV
-
 param_grid = {
     'n_estimators': [50, 100, 200,],
     'learning_rate': [ 0.01,0.1,0.2],
@@ -110,6 +109,12 @@ y_pred_best = best_gb_clf.predict(X_test)
 accuracy_best = accuracy_score(y_test, y_pred_best)
 classification_rep_best = classification_report(y_test, y_pred_best)
 print("Accuratezza: ", accuracy_best)
+
+#Salvo i parametri del modello in un file esterno tramite joblib
+joblib.dump(best_gb_clf, 'GradientBoostingClassifier_model.pkl')
+
+##Codice per caricare il modello salvato
+clf = joblib.load('GradientBoostingClassifier_model.pkl')
 
 # Crea una lista per i titoli delle colonne di input
 lista_titoli_input2 = df_subset.columns[1:17]
